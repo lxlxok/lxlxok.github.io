@@ -1,0 +1,16 @@
+---
+layout:     post
+title:      "2020年小目标"
+subtitle:   ""
+date:       2020-01-01
+author:     "xiao"
+#header-img: "img/post-bg-js-version.jpg"
+tags:
+    - 扯谈
+---
+
+> 业精于勤, 荒于嬉; 行成于思, 毁于随。
+
+1. 建一个独立博客
+2. 读10本经典书籍
+3. 写10篇技术分享
