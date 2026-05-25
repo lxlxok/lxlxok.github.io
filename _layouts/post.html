@@ -51,7 +51,7 @@ layout: default
 
                 <hr>
 
-                {% if site.duoshuo_share && site.duoshuo_username %}
+                {% if site.duoshuo_share and site.duoshuo_username %}
                 <!-- 多说 Share start -->
                 </style>
                 <div class="ds-share"
@@ -103,13 +103,6 @@ layout: default
                 <!-- 多说评论框 end -->
                 {% endif %}
 
-                {% if site.disqus_username %}
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                {% endif %}
 
             </div>
 
@@ -124,15 +117,16 @@ layout: default
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-        				{% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                				<a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+	                    <div class="tags">
+                            {% assign featured_condition_size = site["featured-condition-size"] | default: 0 %}
+                            {% for tag in site.tags %}
+                                {% if tag[1].size > featured_condition_size %}
+                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
                             {% endif %}
-        				{% endfor %}
-        			</div>
+                            {% endfor %}
+	        			</div>
                 </section>
                 {% endif %}
 
@@ -172,22 +166,6 @@ layout: default
 {% endif %}
 
 
-{% if site.disqus_username %}
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "{{site.disqus_username}}";
-    var disqus_identifier = "{{page.id}}";
-    var disqus_url = "{{site.url}}{{page.url}}";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-{% endif %}
 
 
 {% if site.anchorjs %}
@@ -204,9 +182,9 @@ layout: default
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+    async("https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
-          visible: 'always',
+          visible: 'hover',
           placement: 'right',
           icon: '#'
         };

@@ -37,10 +37,11 @@ layout: default
                 <section>
                     <!-- no hr -->
                     <h5><a href="{{'/tags/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
-                    <div class="tags">
-        				{% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                				<a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+	                    <div class="tags">
+                            {% assign featured_condition_size = site["featured-condition-size"] | default: 0 %}
+                            {% for tag in site.tags %}
+                                {% if tag[1].size > featured_condition_size %}
+                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
                             {% endif %}
@@ -86,10 +87,11 @@ layout: default
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="{{'/tags/' | prepend: site.baseurl }}">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        {% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+	                    <div class="tags">
+                            {% assign featured_condition_size = site["featured-condition-size"] | default: 0 %}
+                            {% for tag in site.tags %}
+                                {% if tag[1].size > featured_condition_size %}
+                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
                             {% endif %}
@@ -122,7 +124,7 @@ layout: default
                             {% endif %}
                             {% if site.twitter_username %}
                             <li>
-                                <a href="https://twitter.com/{{ site.twitter_username }}">
+	                                <a target="_blank" rel="noopener" href="https://twitter.com/{{ site.twitter_username }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
@@ -132,7 +134,7 @@ layout: default
                             {% endif %}
                             {% if site.zhihu_username %}
                             <li>
-                                <a target="_blank" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
+	                                <a target="_blank" rel="noopener" href="https://www.zhihu.com/people/{{ site.zhihu_username }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa  fa-stack-1x fa-inverse">知</i>
@@ -142,7 +144,7 @@ layout: default
                             {% endif %}
                             {% if site.weibo_username %}
                             <li>
-                                <a target="_blank" href="http://weibo.com/{{ site.weibo_username }}">
+                                <a target="_blank" rel="noopener" href="https://weibo.com/{{ site.weibo_username }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
@@ -152,7 +154,7 @@ layout: default
                             {% endif %}
                             {% if site.facebook_username %}
                             <li>
-                                <a target="_blank" href="https://www.facebook.com/{{ site.facebook_username }}">
+	                                <a target="_blank" rel="noopener" href="https://www.facebook.com/{{ site.facebook_username }}">
                                     <span class="fa-stack fa-lg">
                                         <i class="fa fa-circle fa-stack-2x"></i>
                                         <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -160,17 +162,37 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
-                            {% if site.github_username %}
-                            <li>
-                                <a target="_blank" href="https://github.com/{{ site.github_username }}">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fa fa-circle fa-stack-2x"></i>
-                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-                        </ul>
+	                            {% if site.github_username %}
+	                            <li>
+	                                <a target="_blank" rel="noopener" href="https://github.com/{{ site.github_username }}" aria-label="GitHub">
+	                                    <span class="fa-stack fa-lg">
+	                                        <i class="fa fa-circle fa-stack-2x"></i>
+	                                        <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+	                                    </span>
+	                                </a>
+	                            </li>
+	                            {% endif %}
+	                            {% if site.linkedin_url %}
+	                            <li>
+	                                <a target="_blank" rel="noopener" href="{{ site.linkedin_url }}" aria-label="LinkedIn">
+	                                    <span class="fa-stack fa-lg">
+	                                        <i class="fa fa-circle fa-stack-2x"></i>
+	                                        <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+	                                    </span>
+	                                </a>
+	                            </li>
+	                            {% endif %}
+	                            {% if site.medium_url %}
+	                            <li>
+	                                <a target="_blank" rel="noopener" href="{{ site.medium_url }}" aria-label="Medium">
+	                                    <span class="fa-stack fa-lg">
+	                                        <i class="fa fa-circle fa-stack-2x"></i>
+	                                        <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+	                                    </span>
+	                                </a>
+	                            </li>
+	                            {% endif %}
+	                        </ul>
                     </div>
                 </section>
                 <!-- Friends Blog -->

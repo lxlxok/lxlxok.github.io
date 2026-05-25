@@ -59,7 +59,7 @@ layout: default
 
                 <hr>
 
-                {% if site.duoshuo_share && site.duoshuo_username %}
+                {% if site.duoshuo_share and site.duoshuo_username %}
                 <!-- 多说 Share start -->
                 </style>
                 <div class="ds-share"
@@ -132,10 +132,11 @@ layout: default
                 <section>
                     <hr class="hidden-sm hidden-xs">
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        {% for tag in site.tags %}
-                            {% if tag[1].size > {{site.featured-condition-size}} %}
-                                <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
+	                    <div class="tags">
+                            {% assign featured_condition_size = site["featured-condition-size"] | default: 0 %}
+                            {% for tag in site.tags %}
+                                {% if tag[1].size > featured_condition_size %}
+                                    <a href="{{ site.baseurl }}/tags/#{{ tag[0] }}" title="{{ tag[0] }}" rel="{{ tag[1].size }}">
                                     {{ tag[0] }}
                                 </a>
                             {% endif %}
@@ -235,9 +236,9 @@ layout: default
 </script>
 <!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
 <script>
-    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+    async("https://cdnjs.cloudflare.com/ajax/libs/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
-          visible: 'always',
+          visible: 'hover',
           placement: 'right',
           icon: '#'
         };

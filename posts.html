@@ -1,0 +1,28 @@
+---
+layout: default
+title: All Posts
+description: "Archive of notes by Xiao Li."
+permalink: /posts/
+---
+<div class="container posts-page" style="padding-top: 80px;">
+  <div class="post-header">
+    <div class="post-type-label">// POSTS</div>
+    <h1>All Entries<span class="cursor"></span></h1>
+    <div class="post-meta-line"><span>TOTAL</span> {{ site.posts.size }} posts</div>
+  </div>
+  <div style="padding-top:36px;">
+    {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for year_group in posts_by_year %}
+    <div style="margin-bottom:36px;">
+      <p class="year-label">// {{ year_group.name }}</p>
+      {% for post in year_group.items %}
+      <div class="post-item">
+        <span class="post-item-date">{{ post.date | date: "%b %d" }}</span>
+        <a href="{{ post.url | relative_url }}" class="post-item-title">{{ post.title }}</a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+    {% if site.posts.size == 0 %}<p style="color:var(--text-muted);font-size:13px;">// No posts yet.</p>{% endif %}
+  </div>
+</div>
